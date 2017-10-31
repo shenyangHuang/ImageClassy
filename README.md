@@ -1,3 +1,4 @@
 # ImageClassy
-project 3 for comp 551
+project 3 for comp 551 \n
+google folder 
 https://drive.google.com/drive/folders/0B2T6WXUfvUxoX3daN0hTNVdXVkE?usp=sharing
