@@ -1,7 +1,7 @@
 import sys
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC, SVR
-
+from sklearn.neighbors import KNeighborsClassifier
 sys.path.append('../')
 from utils import *
 
@@ -9,8 +9,8 @@ if __name__=="__main__":
     p="../../" # path to data files
 
     # model = LogisticRegression()
-    model = SVR()
-    
+    # model = SVR()
+    model = KNeighborsClassifier()
     X,y = load_data(p=p)
 
     X_train, X_valid = X[:int(0.1*(X.shape[0]))], X[int(0.1*(X.shape[0])):]
