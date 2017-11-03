@@ -1,7 +1,7 @@
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Conv2D, MaxPooling2D,Conv1D, MaxPooling1D
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import np_utils
 import sys
@@ -10,20 +10,20 @@ from utils import *
 
 # hyper parameters
 batch_sz = 32
-epochs = 300
-filter_sizes = [32,64,64,32]
-hidden_sz = 256
+epochs = 400
+filter_sizes = [32,64]
+hidden_sz =128
 
 def build_model():
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), padding='same', input_shape=(64,64,1)))
+    model.add(Conv1D(32, (3,), padding='same', input_shape=(64,64)))
     model.add(Activation('relu'))
 
     for fs in filter_sizes:
-        model.add(Conv2D(fs, (2,2)))
-        model.add(Conv2D(fs, (2,2)))
+        model.add(Conv1D(fs, (2,)))
+        model.add(Conv1D(fs, (2,)))
         model.add(Activation('relu'))
-        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(MaxPooling1D(pool_size=(2, )))
         model.add(Dropout(0.25))
 
     model.add(Flatten())
@@ -58,7 +58,8 @@ if __name__=="__main__":
     encoder = LabelEncoder()
     encoded_Y = encoder.fit_transform(y.reshape((-1,)))
     one_hot_y = np_utils.to_categorical(encoded_Y)
-    model = fit(np.expand_dims(X, axis=-1),one_hot_y)
-    
+    # model = fit(np.expand_dims(X, axis=-1),one_hot_y)
+    model = fit(X,one_hot_y)
+    exit(0)
     yp = model.predict(np.expand_dims(X, axis=-1))
     write_prediction(yp,"../../basic_cnn.csv")
