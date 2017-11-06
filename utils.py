@@ -36,7 +36,7 @@ def load_test_data(p = "../", raw=True):
         filter = np.vectorize(lambda x: 0 if x < 225-20 else x)
         X = np.vectorize(X.flatten()).reshape((-1,4096))
         X = (X - np.mean(X,axis=0))/128 #normalize
-    print("X_test.shape",x.shape)
+    print("X_test.shape",X.shape)
     return X
 
 
