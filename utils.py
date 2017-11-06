@@ -15,13 +15,13 @@ def load_data(p="../", raw=True):
         X = np.loadtxt(p+"train_x.csv", delimiter=",") # load from text 
         y = np.loadtxt(p+"train_y.csv", delimiter=",") 
         y = y.reshape(-1, 1)
-        np.save(p+"X_train",x)
+        np.save(p+"X_train",X)
         np.save(p+"y_train",y)
     if not raw:
         filter = np.vectorize(lambda x: 0 if x < 225-20 else x)
         X = np.vectorize(X.flatten()).reshape((-1,4096))
         X = (X - np.mean(X,axis=0))/128 #normalize
-    print("X.shape",x.shape, "Y.shape",y.shape)
+    print("X.shape",X.shape, "Y.shape",y.shape)
     X,y = shuffle(X,y)
     return X,y
 
@@ -31,7 +31,7 @@ def load_test_data(p = "../", raw=True):
         X = np.load(p+"X_test"+("" if raw else "_preprocessed")+".npy")
     except:
         X = np.loadtxt(p+"test_x.csv", delimiter=",") # load from text
-        np.save(p+"X_test.npy",x)
+        np.save(p+"X_test.npy",X)
     if not raw:    
         filter = np.vectorize(lambda x: 0 if x < 225-20 else x)
         X = np.vectorize(X.flatten()).reshape((-1,4096))
