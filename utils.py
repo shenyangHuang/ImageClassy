@@ -9,37 +9,36 @@ import sys
 
 def load_data(p="../", raw=True):
     try:
-        x = np.load(p+"X_train"+("" if raw else "_preprocessed")+".npy")
+        X = np.load(p+"X_train.npy")
         y = np.load(p+"y_train.npy")
     except:
-        if not raw:
-            print("Do preprocessing first! python utils.py -preprocess")
-            exit(0)
-        x = np.loadtxt(p+"train_x.csv", delimiter=",") # load from text 
+        X = np.loadtxt(p+"train_x.csv", delimiter=",") # load from text 
         y = np.loadtxt(p+"train_y.csv", delimiter=",") 
-        x = x.reshape(-1, 64, 64) # reshape 
         y = y.reshape(-1, 1)
         np.save(p+"X_train",x)
         np.save(p+"y_train",y)
+    if not raw:
+        filter = np.vectorize(lambda x: 0 if x < 225-20 else x)
+        X = np.vectorize(X.flatten()).reshape((-1,4096))
+        X = (X - np.mean(X,axis=0))/128 #normalize
     print("X.shape",x.shape, "Y.shape",y.shape)
-    x,y = shuffle(x,y)
-    return x,y
+    X,y = shuffle(X,y)
+    return X,y
+
 
 def load_test_data(p = "../", raw=True):
     try:
-        x = np.load(p+"X_test"+("" if raw else "_preprocessed")+".npy")
+        X = np.load(p+"X_test"+("" if raw else "_preprocessed")+".npy")
     except:
-        if not raw:
-            print("Do preprocessing first! python utils.py -preprocess")
-            exit(0)
-        x = np.loadtxt(p+"test_x.csv", delimiter=",") # load from text
-        x = x.reshape((-1,64,64))
+        X = np.loadtxt(p+"test_x.csv", delimiter=",") # load from text
         np.save(p+"X_test.npy",x)
+    if not raw:    
+        filter = np.vectorize(lambda x: 0 if x < 225-20 else x)
+        X = np.vectorize(X.flatten()).reshape((-1,4096))
+        X = (X - np.mean(X,axis=0))/128 #normalize
     print("X_test.shape",x.shape)
-    return x
+    return X
 
-def write_prediction(yp,p="../test_y.csv"):
-    np.savetxt(p, yp, delimiter=",")
 
 
 ######################
