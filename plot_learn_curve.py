@@ -2,7 +2,7 @@ import numpy
 import matplotlib.pyplot as plot
 
 if __name__ == '__main__':
-    data = numpy.loadtxt('../cnn_history0.2D.csv', skiprows=1, delimiter=',')
+    data = numpy.loadtxt('../cnn_history0.2DD.csv', skiprows=1, delimiter=',')
     epoch    = data[:,0].flatten()
     loss     = data[:,1].flatten()
     acc     = data[:,2].flatten()

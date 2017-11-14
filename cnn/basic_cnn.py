@@ -15,7 +15,7 @@ from utils import *
 # hyper parameters
 batch_sz = 128
 epochs = 300
-filter_sizes = [32,32]
+filter_sizes = [32,32,32]
 hidden_sz = 256
 
 def build_model():
@@ -31,11 +31,11 @@ def build_model():
         model.add(Activation('relu'))
 
         model.add(Conv2D(fs, (1,1)))
-        model.add(Conv2D(fs, (3,3)))
+        # model.add(Conv2D(fs, (3,3)))
         model.add(BatchNormalization())
         model.add(Activation('relu'))
 
-        model.add(AveragePooling2D(pool_size=(4, 4)))
+        model.add(AveragePooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.2))
 
     model.add(Flatten())
@@ -69,7 +69,7 @@ def fit(X,y, save=False):
         tmp = np.concatenate([train_loss, train_acc, valid_loss, valid_acc], axis=1)
         print("write shape",tmp.shape)
         df = pd.DataFrame(tmp,columns = ["train_loss"," train_acc", "valid_loss", "valid_acc"])
-        df.to_csv("../../cnn_history0.2filter.csv")
+        df.to_csv("../../cnn_history0.2DD.csv")
         
     return model
 
@@ -82,8 +82,8 @@ def filter(x):
 
 if __name__=="__main__":
     X,y =load_data("../../",raw=True)
-    filter = np.vectorize(filter)
-    X = filter(X.flatten()).reshape((-1,4096))
+    # filter = np.vectorize(filter)
+    # X = filter(X.flatten()).reshape((-1,4096))
     X = (X - np.mean(X,axis=0))/128 #normalize
     X, y = shuffle(X,y)
 
