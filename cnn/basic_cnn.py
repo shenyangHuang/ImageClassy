@@ -81,7 +81,8 @@ def filter(x):
         return x
 
 if __name__=="__main__":
-    X,y =load_data("../../",raw=True)
+    data_p = sys.argv[1]
+    X,y =load_data(data_p,raw=True)
     # filter = np.vectorize(filter)
     # X = filter(X.flatten()).reshape((-1,4096))
     X = (X - np.mean(X,axis=0))/128 #normalize

@@ -5,12 +5,15 @@ from sklearn.neighbors import KNeighborsClassifier
 sys.path.append('../')
 from utils import *
 
-p="../../" # path to data files
 
-def eval(X,y, c = 1):
-    # model = LogisticRegression()
-    model = SVC(C=c)
-    # model = KNeighborsClassifier()
+def eval(X,y,clf, c = 1):
+    if clf == "LogisticRegression":
+        model = LogisticRegression()
+    elif clf == "SVM":
+        model = SVC(C=c)
+    else:
+        print("Input name has to be either LogisticRegression or SVM!")
+        exit(0)
 
     X_train, X_valid = X[:int(0.1*(X.shape[0]))], X[int(0.1*(X.shape[0])):]
     y_train, y_valid = y[:int(0.1*(X.shape[0]))], y[int(0.1*(X.shape[0])):]
@@ -24,8 +27,9 @@ def eval(X,y, c = 1):
 
 
 if __name__=="__main__":
+    
+    p=sys.argv[1] # path to data files
     X,y = load_data(p=p, raw=True)
-    C = np.random.uniform(low=0.5,high=10,size=10)
-    for c in C:
-        print("penalty: ",c)
-        eval(X,y,c)
+    clf = sys.argv[2]
+
+    eval(X,y,clf)
