@@ -2,15 +2,13 @@
 project 3 for comp 551 
 
 Dependency libraries:
+
 ```pip install keras```
 
 ```pip install sklearn```
 
 ```pip install opencv_python```
 
-
-google folder 
-https://drive.google.com/drive/folders/0B2T6WXUfvUxoX3daN0hTNVdXVkE?usp=sharing
 
 To generate data files in .npy format (Preprocessing WIP):
  ```python utils data_dir -preprocess```
