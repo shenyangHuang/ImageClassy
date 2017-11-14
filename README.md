@@ -32,3 +32,11 @@ To run CNN: download dataset into a same directory
 
 ```python basic_cnn path_to_data_file```
 
+To run DenseNet and ResNet:
+1.cd desenet-resnet
+2.pick your favourite model (ex. Densenet-100)
+3.run train.py
+
+
+
+
