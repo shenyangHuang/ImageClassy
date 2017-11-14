@@ -22,7 +22,14 @@ To run baseline:
 ```python lr_svm path_to_data_file classifier_to_use```
 where classifier_to_use is either "LogisticRegression" or "SVM"
 
+To Run Fully Connected Feedforward Neural Network (folder: ffnn)
+1. put "train_x.csv" and "train_y.csv" into a subfolder called "data" in this directory
+2. Run the ffnn.ipynb
+Note: as mentioned in the report, using 200 neurons per layer and 4 hidden layers takes very long to train (>20 hours)
+this code is not optimized for GPUs
+
 To run CNN: download dataset into a same directory
 ```cd cnn```
 
 ```python basic_cnn path_to_data_file```
+
