@@ -1,5 +1,5 @@
 # ImageClassy
-project 3 for comp 551 
+project 3 for Applied Machine Learning Course Fall 2017 
 
 Dependency libraries:
 
